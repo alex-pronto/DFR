@@ -1,0 +1,76 @@
+﻿@model UserViewModel
+<h4><center>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</center></h4>
+
+@{
+    ViewData["Title"] = "Admin Page - User";
+}
+
+    <div class="container"> 
+             <div class="row">
+
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+     
+    <div class="col-8">
+                 
+  
+  <table class="table">
+  <thead>
+    
+  <tr><h4>Пользователь @Model.Email</h4></tr>
+
+  </thead>
+  <tbody>
+                   
+                            
+                            <tr>
+                            <th>Email</th>
+                            <td>@Model.Email</td>
+                            </tr>
+                            
+                            <tr>
+                            <th>Имя</th>
+                            <td>@Model.Name</td>
+                            </tr>
+
+                            <tr>
+                            <th>Фамилия</th>
+                            <td>@Model.SurName</td>
+                            </tr>
+
+                            <tr>
+                            <th>Телефон</th>
+                            <td>@Model.Phone</td>
+                            </tr>
+
+                            <tr>
+                            <th>Статус</th>
+                             <td>@ViewBag.CurrentRole</td>
+                            </tr>
+                            
+
+<td>
+                        <div class="dropdown">
+  <button class="btn btn-default" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Действия
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" asp-area="admin" asp-controller="users" asp-action="changepassword" asp-route-id="@Model.Id" >Сменить пароль</a></li>
+    <li><a class="dropdown-item"asp-area="admin" asp-controller="users" asp-action="edit" asp-route-id="@Model.Id" >Редактировать данные</a></li>
+    <li><a class="dropdown-item" asp-area="admin" asp-controller="users" asp-action="changerole" asp-route-id="@Model.Id">Изменить права доступа</a></li>
+    <li><a class="dropdown-item" asp-area="admin" asp-controller="users" asp-action="delete" asp-route-id="@Model.Id">Удалить пользователя</a></li>
+  </ul>
+</div>
+
+</td>
+         
+        </tbody>
+    </table>
+
+
+   </div>
+        </div>
+            </div>
+
+        

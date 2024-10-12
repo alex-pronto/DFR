@@ -1,0 +1,59 @@
+﻿
+<h4><center>Список Ролей</center></h4>
+@model List<RoleViewModel>
+
+@{
+    ViewData["Title"] = "Admin Page - Roles";
+    ViewBag.Count = 1;
+}
+
+
+
+    <div class="container"> 
+             <div class="row">
+
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+
+        <div class="col-8">
+            <div><td><a class="btn btn-default" asp-area="admin" asp-controller="roles" asp-action="add" >Добавить новую роль</a></td></div>
+             <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">N°</th>
+      <th scope="col">Название</th>
+    </tr>
+  </thead>
+  <tbody>
+                    @foreach (var role in Model)
+                    {
+                                        <tr> 
+                                        <th scope="row">@(ViewBag.Count++)</th>
+                                        <td>@role.Name</td>
+                                                <td><a class="btn btn-default" asp-area="admin" asp-controller="roles" asp-action="delete" asp-route-name="@role.Name">Удалить роль</a></td>
+
+
+                                        </tr>
+
+                    } 
+
+
+        </tbody>
+    </table>
+
+
+   </div>
+        </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+

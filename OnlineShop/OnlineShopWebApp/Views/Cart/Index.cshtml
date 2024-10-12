@@ -1,0 +1,88 @@
+﻿@model CartViewModel
+
+
+@if (Model == null || Model.Items.Count == 0)
+{
+    <h5>В корзине пока пусто</h5>
+         <a class = "btn btn-dark" 
+             asp-controller="home" 
+             asp-action="index" role = "button">Продолжить покупки</a>
+
+}
+else
+{
+    <div class = "row">
+        <div class = "col">
+            <table class = "table">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                             <th>Цена, руб</th>
+                                 <th>Дата </th>
+                            <th>Диапазон бронирования</th>
+                            <th>Убрать/Добавить</th>
+                            <th>Стоимость, руб</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.DanceFloor.Name</td>
+                            <td>@item.DanceFloor.Cost</td>
+                            <td>@item.OrderedTime.ToShortDateString()</td>
+                            <td>@item.OrderedTime.ToShortTimeString() - @item.OrderedTime.AddHours(1).ToShortTimeString() </td>
+                            <td><a href="@Url.Action("Remove", "Cart", new {@item.Id})" class="btn btn-outline-secondary"><h4> - </h4></a>
+                              @item.Quantity
+                            <a href="@Url.Action("Index", "Product", new {@item.DanceFloor.Id})" class="btn btn-outline-secondary"><h4> + </h4></a></td> 
+                             <td>@item.CostPosition</td>
+
+                        </tr>
+                    }
+                </tbody>
+                </table>
+                <div class = "text-right">
+                    <h3>Итого</h3>
+                        <h3>@Model.TotalCost</h3>
+                </div>
+        </div>   
+    </div>
+
+        <a class = "btn btn-dark" 
+            asp-controller="Home" 
+            asp-action="Index" role = "button">Продолжить покупки</a>
+
+        <a class="btn btn-danger" href="@Url.Action("ClearCart", "Cart", new {@Model.UserId})" >Очистить корзину</a>
+        
+       
+              
+    @if (User.Identity.IsAuthenticated)
+    {
+                <a class = "btn btn-success" 
+                         asp-controller="order" 
+                         asp-action="Index"
+                         asp-route-userId = "@Model.UserId"
+                         role = "button">Оформить заказ</a>
+    }
+            
+    else 
+    {
+                <a class = "btn btn-success" 
+                     asp-controller="order" 
+                     asp-action="Index"
+                     asp-route-userId = "@Model.UserId"
+                     role = "button">Быстрое оформление заказа (без регистрации)</a>
+
+        <a class = "btn btn-success" 
+                 asp-controller="cart" 
+                             asp-action="IndexLogin"
+                                     asp-route-userId = "@Model.UserId"
+                 role = "button">Зарегистрироваться (войти) и Оформить заказ</a>
+    }
+
+}
+
+
+
+ 

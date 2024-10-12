@@ -1,0 +1,83 @@
+﻿@model List<RoleViewModel>
+
+
+<h4><center>СМЕНА РОЛИ ПОЛЬЗОВАТЕЛЯ</center></h4>
+
+@{
+    ViewData["Title"] = "Admin Page - ChangeUserStatus";
+}
+
+    <div class="container"> 
+             <div class="row">
+
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+
+  <div class="col-8">
+
+  <form method="post" class="form-horizontal">
+  <table class="table">
+      <div class="container">
+  <thead>
+
+  <tr><h4>Пользователь @ViewBag.User</h4></tr>
+
+  </thead>
+  <tbody>
+       <div class="validation" asp-validation-summary = "ModelOnly"></div>
+
+       @foreach(var role in @Model)
+                            {
+                                bool flag = false;
+                                <tr>
+                                <th>
+                                            @foreach(var userRole in @ViewBag.CurrentRoles) 
+                                           {
+                                        @if (userRole == role.Name)
+                                            {
+                                                flag = true;
+                                            }     
+                                           }
+                                               <p>
+                                <input type="radio" checked ="@flag" value ="@role.Name" name="roles" id = "roles"/> @role.Name
+                </p>
+                                </th>
+                                </tr>
+                            }
+                            
+
+<tr>
+<th>
+ <a class="btn btn-default" asp-area="admin" asp-controller="users" asp-action="info" asp-route-Id="@ViewBag.UserId">Назад</a>
+</th>
+<td>
+<button type="submit"  asp-area="admin" asp-controller="users" asp-action="changerole"  class="btn btn-default" asp-route-Id="@ViewBag.UserId">Сохранить</button> 
+</td>
+
+<td>
+ <div class="dropdown">
+  <button class="btn btn-default" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Действия
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" asp-area="admin" asp-controller="users" asp-action="changepassword" asp-route-id="@ViewBag.UserId" >Сменить пароль</a></li>
+    <li><a class="dropdown-item"asp-area="admin" asp-controller="users" asp-action="edit" asp-route-id="@ViewBag.UserId" >Редактировать данные</a></li>
+    <li><a class="dropdown-item" asp-area="admin" asp-controller="users" asp-action="changerole" asp-route-id="@ViewBag.UserId">Изменить права доступа</a></li>
+    <li><a class="dropdown-item" asp-area="admin" asp-controller="users" asp-action="delete" asp-route-id="@ViewBag.UserId ">Удалить пользователя</a></li>
+  </ul>
+</div>
+
+</td>
+</tr>
+
+        </tbody>
+
+    </table>
+    </form>
+
+   </div>
+        </div>
+            </div>
+
+

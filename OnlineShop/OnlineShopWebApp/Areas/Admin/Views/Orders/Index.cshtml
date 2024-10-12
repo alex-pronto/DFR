@@ -1,0 +1,68 @@
+﻿<h4><center>Заказы</center></h4>
+
+@model List<OrderViewModel>
+@using OnlineShopWebApp.Models
+
+@{
+    ViewData["Title"] = "Admin Page - Orders";
+    ViewBag.Count = 1;
+}
+
+
+
+    <div class="container"> 
+             <div class="row">
+
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+
+        <div class="col-8">
+             <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">N°</th>
+      <th scope="col">Сумма</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Пользователь</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Время</th>
+      <th scope="col">Подробнее</th>
+    </tr>
+  </thead>
+  <tbody>
+                    @foreach (var order in Model)
+                    {
+                            <tr> 
+                                <th scope="row">@(ViewBag.Count++)</th>
+                                <td>@order.TotalCost</td>
+                                    <td>@EnumHelper.GetDisplayName(order.Status) </td>
+                                        <td>@order.DeliveryInfo.EMail</td>
+                                            <td>@order.OrderTime.ToString("d") </td>
+                                                <td>@order.OrderTime.ToString("t")</td>
+                                        <td><a class="btn btn-default" asp-area="admin" asp-controller="orders" asp-action="details" asp-route-id="@order.Id">Подробнее</a></td>
+                        
+
+                            </tr>
+
+                    } 
+
+
+        </tbody>
+    </table>
+
+
+   </div>
+        </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+

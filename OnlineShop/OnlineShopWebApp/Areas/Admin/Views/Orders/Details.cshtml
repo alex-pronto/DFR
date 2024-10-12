@@ -1,0 +1,85 @@
+﻿<h4><center>Детали Заказа</center></h4>
+@using OnlineShopWebApp.Models
+@model OrderViewModel
+
+@{
+    ViewData["Title"] = "Admin Page - OrderDetails";
+}
+
+
+
+    <div class="container"> 
+             <div class="row">
+
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+
+        <div class="col-8">
+            <form method = "post">
+             <table class="table">
+    <tr>
+      <td>Сумма</td>
+      <td>@Model.TotalCost</td>
+    </tr>
+
+    <tr>
+         <td>Статус</td>
+         <td>@EnumHelper.GetDisplayName(@Model.Status)</td>
+    </tr>
+    <tr>
+         <td>Пользователь</td>
+         <td>@Model.DeliveryInfo.EMail </td>
+    </tr>
+    <tr>
+         <td>Дата</td>
+         <td>@Model.OrderTime.ToString("d")</td>
+    </tr>
+    <tr>
+         <td>Дата создания заказа</td>
+         <td>@Model.OrderTime.ToString("t")</td>
+    </tr>
+    <tr>
+         <td>Забронировано</td>
+         
+             @foreach (var item in Model.Items)
+                            {
+                                    
+             <tr><td></td><td>@item.DanceFloor.Name</td>
+                 <td>@item.OrderedTime.ToString("d")</td>
+                     <td>@item.OrderedTime.ToString("t")</td>
+                         </tr>
+                            }
+                         
+    </tr>
+    <tr>
+         <td>Статус Заказа</td>
+         <td>
+             <select asp-for="@Model.Status"
+             asp-items="@(Html.GetEnumSelectList<OrderStatusViewModel>())"
+             class = "form-control">
+            </select>
+         </td>
+    </tr>
+    </table>
+    <div class="col-12">
+ <button type="submit" asp-area="admin" asp-controller="orders"  asp-action="updatestatus" asp-route-orderId="@Model.Id" class="btn btn-default">Сохранить</button></div>
+ <div class="col-12">
+ <a class="btn btn-default" asp-area="admin" asp-controller="orders" asp-action="index">Назад</a>
+</div>
+    </form>
+
+   </div>
+        </div>
+            </div>
+                
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+﻿<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineShopWebApp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="home" asp-action="index">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="cart" asp-action="index">Корзина<sup class="text-success">@await Component.InvokeAsync("Cart")</sup></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="favourite" asp-action="index">Избранное<sup class="text-success">@await Component.InvokeAsync("CalcFavouriteDanceFloorCount")</sup></a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class = "nav-item text-dark">
+                                @User.Identity.Name
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="account" asp-action="logout">Выход</a>
+                        </li>
+                        }
+                        else
+                        {
+                           
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="account" asp-action="login">Войти</a>
+                        </li>
+                        }
+                        @if (User.IsInRole(Constants.AdminRoleName))
+                        {
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="admin" asp-controller="home" asp-action="index">Администратор</a>
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>

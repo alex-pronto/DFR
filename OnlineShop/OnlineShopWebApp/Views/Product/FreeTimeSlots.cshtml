@@ -1,0 +1,30 @@
+﻿@model DanceFloorViewModel
+
+
+<h4>Часы для бронирования на @Model.Time.SelectedDate.ToLongDateString() </h4>
+
+@foreach (var time  in @Model.Time.RangeTimeForOrders)
+{
+               
+    <div col-3-sm >
+    
+                    
+                       <a class =  "btn btn-success"
+                            asp-area=""
+                            asp-controller="Product"
+                            asp-action="SelectedTime"
+
+                            asp-route-Id="@Model.Id"
+                            asp-route-SelectedTime = "@time"
+                            asp-route-SelectedDay = "@Model.Time.SelectedDate.Day"
+                            asp-route-SelectedMonth = "@Model.Time.SelectedDate.Month"
+                            asp-route-SelectedYear = "@Model.Time.SelectedDate.Year"
+                             
+                                     input type = "submit" >Забронировать зал на @time : 00 </a>
+                               
+        
+            </div>
+            <br />
+                
+        
+}

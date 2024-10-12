@@ -1,0 +1,48 @@
+﻿@model List<DanceFloorViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class = "row">
+    @foreach (var danceFloor in Model)
+    {
+                <div class="col-3 card shadow">
+                    <div class="card">
+                    <img class = "card-img-top" Height="130" Width="195" alt="Изображение товара" src = @danceFloor.ImagePath  ></img>
+
+                    <div class = "card body">
+
+                    <a style = "color:black" 
+                        asp-area=""
+                        asp-controller="product"
+                        asp-action="index"
+                        asp-route-Id="@danceFloor.Id">
+
+                    <h5>@danceFloor.Name</h5></a>
+                    <h5>@danceFloor.Cost руб</h5>
+
+                            <a class = "btn btn-dark" 
+                        asp-area=""
+                        asp-controller="product"
+                        asp-action="index"
+                        asp-route-Id="@danceFloor.Id"
+                        role = "button">Побробнее</a>
+                        <a class = "btn btn-success" 
+                        asp-area=""
+                        asp-controller="favourite"
+                        asp-action="add"
+                        asp-route-danceFloorId="@danceFloor.Id"
+                        role = "button">Добавить в избранное</a>
+
+            </div>
+                </div>
+                    </div>
+
+    } 
+
+</div>
+
+
+
+
+
+

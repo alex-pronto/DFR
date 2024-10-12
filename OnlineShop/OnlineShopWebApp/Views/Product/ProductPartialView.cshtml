@@ -1,0 +1,46 @@
+﻿@using OnlineShop.Db;
+@using OnlineShop.Models;
+@model DanceFloorViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewBag.Id = @Model.Id;
+}
+
+
+    <div class = "col1 = card shadow">
+
+                    <img class = "img-fluid" Height="600" Width="800" src = @Model.ImagePath ></img>
+                <div class = "card body">
+
+                        <h5>@Model.Name</h5>
+                        <h5>@Model.Cost руб</h5>
+                        <h5>@Model.Description</h5>
+                        <a class = "btn btn-dark" 
+                            asp-controller="Home" 
+                            asp-action="Index" role = "button">Назад</a>
+                        
+        <br />
+
+        <h3>Посмотреть календарь свободных часов. @Model.Name</h3>
+        
+        @await Html.PartialAsync("Calendar", Model)
+
+        <br />
+        
+        @if (Model.Time.SelectedDate.Year != 0001)
+        {
+            @await Html.PartialAsync("FreeTimeSlots", Model)
+        }
+       
+
+
+            </div>
+    </div>  
+
+
+
+
+
+
+

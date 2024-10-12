@@ -1,0 +1,62 @@
+﻿<h4><center>Продукты</center></h4>
+
+@model List<DanceFloorViewModel>
+
+
+@{
+    ViewData["Title"] = "Admin Page - Products";
+    ViewBag.Count = 1;
+}
+
+
+
+    <div class="container"> 
+             <div class="row">
+
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+
+        <div class="col-8">
+            <div><td><a class="btn btn-default" asp-area="admin" asp-controller="products" asp-action="add" >Добавить новый продукт</a></td></div>
+             <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">N°</th>
+      <th scope="col">Название</th>
+      <th scope="col">Цена</th>
+      <th scope="col">Редактировать</th>
+      <th scope="col">Удалить</th>
+    </tr>
+  </thead>
+  <tbody>
+                    @foreach (var danceFloor in Model)
+                    {
+                            <tr> 
+                                <th scope="row">@(ViewBag.Count++)</th>
+                                <td>@danceFloor.Name</td>
+                                <td>@danceFloor.Cost</td>
+                                        <td><a class="btn btn-default"  asp-area="admin" asp-controller="products" asp-action="edit" asp-route-id="@danceFloor.Id" >Редактировать</a></td>
+                                            <td><a class="btn btn-default" asp-area="admin" asp-controller="products" asp-action="delete" asp-route-id="@danceFloor.Id " >Удалить</a></td>
+
+                            </tr>
+
+                    } 
+
+
+        </tbody>
+    </table>
+
+
+   </div>
+        </div>
+            </div>
+
+
+
+
+
+
+
+
+
